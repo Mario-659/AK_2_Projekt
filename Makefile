@@ -1,11 +1,11 @@
-CC = g++
-CFLAGS = -Wall -g -std=c++11
+CXX = g++
+CXXFLAGS = -Wall -g -std=c++11 -m32
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-EXE_NAME = bcd_arithmetic
+EXE_NAME = bcd_library
 
 all: $(OBJS)
-	$(CC) $(CFLAGS) -o $(EXE_NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS)  -o $(EXE_NAME) $(OBJS)
 
 clean:
-	rm -f *.o a.out
+	rm -f $(OBJS) $(EXE_NAME)
