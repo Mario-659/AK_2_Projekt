@@ -48,7 +48,7 @@ if(NOT googletest_POPULATED)
 endif()
 
 set(SOURCES_TST test/main.cpp
-                test/sample_test.cpp
+                test/BCD_add_tst.cpp
                 )
 
 add_executable(${PROJECT_NAME}_tst ${SOURCES_TST})
