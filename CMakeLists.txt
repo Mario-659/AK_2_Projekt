@@ -7,7 +7,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_CXX_STANDARD 11)
-add_compile_options(-Wall -g -m32)
+add_compile_options(-Wall -g -m32 -O2)
 
 
 set(SOURCES src/main.cpp
