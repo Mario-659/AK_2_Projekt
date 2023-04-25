@@ -1,14 +1,10 @@
 #ifndef BCD_ADD_H
 #define BCD_ADD_H
 
-#include <vector>
 #include <utility>
 #include <iostream>
 
-struct BCD {
-    std::vector<unsigned char> digits;
-    unsigned floating_point_position;
-};
+#include "BCD.h"
 
 // Adds two BCD numbers. Does not work with different floating point positions.
 BCD add_bcd(const BCD& a, const BCD& b) {

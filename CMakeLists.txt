@@ -12,6 +12,7 @@ add_compile_options(-Wall -g -m32 -O2)
 
 set(SOURCES src/main.cpp
             src/BCD_add.h
+            src/BCD.h
             )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
