@@ -75,7 +75,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_carry_and_floating_point_2) {
     result = add_bcd(a, b);
 
     EXPECT_EQ(result.digits, (std::vector<unsigned char>{0x08, 0x07, 0x07, 0x01}));
-    // EXPECT_EQ(result.floating_point_position, 2);
+    EXPECT_EQ(result.floating_point_position, 2);
 }
 
 TEST(BCDAdditionTest, should_add_two_numbers_with_same_length_and_no_carry) {
@@ -134,7 +134,7 @@ TEST(BCDAdditionTest, BCDAdditionTest_should_add_two_numbers_with_different_leng
 
     result = add_bcd(a, b);
 
-    // EXPECT_EQ(result.digits, (std::vector<unsigned char>{0x01, 0x07, 0x00, 0x00, 0x00, 0x01}));
-    // EXPECT_EQ(result.floating_point_position, 4);
+    EXPECT_EQ(result.digits, (std::vector<unsigned char>{0x01, 0x07, 0x00, 0x00, 0x00, 0x01}));
+    EXPECT_EQ(result.floating_point_position, 4);
 }
 
