@@ -7,7 +7,7 @@
 
 #include "BCD.h"
 
-BCD add_bcd(const BCD& a, const BCD& b) {
+inline BCD add_bcd(const BCD& a, const BCD& b) {
     BCD result;
 
     int length_before_point = std::max(a.digits_before_point.size(), b.digits_before_point.size());
@@ -73,7 +73,7 @@ BCD add_bcd(const BCD& a, const BCD& b) {
     return result;
 }
 
-std::vector<unsigned char> bcd_add(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
+inline std::vector<unsigned char> bcd_add(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
     std::vector<unsigned char> result;
 
     int length_after_point = std::max(a.size(), b.size());

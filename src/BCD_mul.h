@@ -8,7 +8,7 @@
 #include "BCD.h"
 #include "BCD_add.h"
 
-std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
+inline std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
     std::vector<unsigned char> result;
     std::vector<std::vector<unsigned char>> partial_products;
 
@@ -57,7 +57,7 @@ std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, const st
     return result;
 }
 
-BCD multiply_bcd(const BCD& a, const BCD& b) {
+inline BCD multiply_bcd(const BCD& a, const BCD& b) {
     // will break multiplication into 4 stages:
     //   1. a.digits_before_point * b.digits_before_point
     //   2. a.digits_before_point * b.digits_after_point
