@@ -5,8 +5,8 @@
 
 
 struct BCD {
-    std::vector<unsigned char> digits;
-    unsigned floating_point_position;
+    std::vector<unsigned char> digits_before_point;
+    std::vector<unsigned char> digits_after_point;
 };
 
 
