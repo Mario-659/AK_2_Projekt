@@ -73,5 +73,37 @@ BCD add_bcd(const BCD& a, const BCD& b) {
     return result;
 }
 
+std::vector<unsigned char> bcd_add(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
+    std::vector<unsigned char> result;
+
+    int length_after_point = std::max(a.size(), b.size());
+    result.resize(length_after_point, 0);
+
+    unsigned char carry = 0;
+    for (int i = a.size() - 1, j = b.size() - 1, k = length_after_point - 1; i >= 0 || j >= 0; --i, --j, --k) {
+        
+        unsigned char digitA = (i >= 0) ? a[i] : 0;
+        unsigned char digitB = (j >= 0) ? b[j] : 0;
+        unsigned char sum = digitA + digitB;
+
+        __asm__(
+            "add %2, %0\n\t"
+            "aaa\n\t"
+            "mov %%ah, %1"
+            : "+a"(sum), "=r"(carry)
+            : "r"(carry)
+            : "cc"
+        );
+
+        result[k] = sum;
+    }
+
+    // Add the carry to the result
+    if (carry != 0) {
+        result.insert(result.begin(), carry);
+    }
+
+    return result;
+}
 
 #endif
