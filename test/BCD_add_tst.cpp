@@ -158,7 +158,7 @@ TEST(BCDAdditionTest, BCDAdditionTest_should_add_two_numbers_with_different_leng
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x05, 0x01}));
 }
 
-TEST(BCDAdditionTest, BCDAdditionTest_should_add_two_numbers_with_no_digits_before_point) {
+TEST(BCDAdditionTest, BCDAdditionTest_should_add_two_numbers_with_no_digits_before_point_1) {
     BCD a, b, result;
 
     
@@ -170,5 +170,19 @@ TEST(BCDAdditionTest, BCDAdditionTest_should_add_two_numbers_with_no_digits_befo
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x08}));
+}
+
+TEST(BCDAdditionTest, BCDAdditionTest_should_add_two_numbers_with_no_digits_before_point_2) {
+    BCD a, b, result;
+    
+    a.digits_after_point = {0x01, 0x04, 0x04, 0x04, 0x05};
+
+    b.digits_after_point = {0x09, 0x06};
+    b.digits_before_point = {0x03};
+
+    result = add_bcd(a, b);
+
+    EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x04, 0x05, 0x04, 0x01}));
+    EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x03}));
 }
 
