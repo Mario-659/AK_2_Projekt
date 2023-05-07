@@ -7,12 +7,13 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 set(CMAKE_CXX_STANDARD 11)
-add_compile_options(-Wall -g -m32 -O2)
+add_compile_options(-Wall -g -m32 -O3)
 
 
 set(SOURCES src/main.cpp
             src/BCD_add.h
             src/BCD.h
+            src/BCD_mul.h
             )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -50,6 +51,8 @@ endif()
 
 set(SOURCES_TST test/main.cpp
                 test/BCD_add_tst.cpp
+                test/BCD_sub_tst.cpp
+                test/BCD_mul_tst.cpp
                 )
 
 add_executable(${PROJECT_NAME}_tst ${SOURCES_TST})
