@@ -9,9 +9,14 @@
 #include "BCD_add.h"
 
 inline std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
+    // return 0 if either of the numbers is 0
+    if (b.size() == 0 || (b.size() && b.front() == 0x00) || a.size() == 0 || (a.size() && a.front() == 0x00)) {
+        return std::vector<unsigned char>{0x00};
+    }
+
     std::vector<unsigned char> result;
     std::vector<std::vector<unsigned char>> partial_products;
-
+    
     int zero_counter = 0;
     for (int i = b.size() - 1; i >= 0; --i) {
         unsigned char digitB = b[i];
@@ -67,23 +72,32 @@ inline BCD multiply_bcd(const BCD& a, const BCD& b) {
     std::vector<unsigned char> result;
     BCD result_1, result_2, result_3, result_4;
 
-    result_1.digits_after_point = bcd_mul(a.digits_before_point, b.digits_before_point);
-    
-    int digits_after_point_result_2 = b.digits_after_point.size();
+    result_1.digits_before_point = bcd_mul(a.digits_before_point, b.digits_before_point);
+
+    // maybe these result.front check can be removed
     result = bcd_mul(a.digits_before_point, b.digits_after_point);
-    result_2.digits_before_point = std::vector<unsigned char>(result.end() - digits_after_point_result_2, result.end());
-    result_2.digits_after_point = std::vector<unsigned char>(result.begin(), result.end() - digits_after_point_result_2);
+    if (result.front() != 0x00) {
+        int digits_after_point_result_2 = b.digits_after_point.size();
+        result_2.digits_after_point = std::vector<unsigned char>(result.end() - digits_after_point_result_2, result.end());
+        result_2.digits_before_point = std::vector<unsigned char>(result.begin(), result.end() - digits_after_point_result_2);
+    }
 
     result = bcd_mul(a.digits_after_point, b.digits_before_point);
-    int digits_after_point_result_3 = a.digits_after_point.size();
-    result_3.digits_before_point = std::vector<unsigned char>(result.end() - digits_after_point_result_3, result.end());
-    result_3.digits_after_point = std::vector<unsigned char>(result.begin(), result.end() - digits_after_point_result_3);
+    if (result.front() != 0x00) {
+        int digits_after_point_result_3 = a.digits_after_point.size();
+        result_3.digits_after_point = std::vector<unsigned char>(result.end() - digits_after_point_result_3, result.end());
+        result_3.digits_before_point = std::vector<unsigned char>(result.begin(), result.end() - digits_after_point_result_3);
+    }
 
     result = bcd_mul(a.digits_after_point, b.digits_after_point);
-    int digits_after_point_result_4 = a.digits_after_point.size() + b.digits_after_point.size();
-    result_4.digits_before_point = std::vector<unsigned char>(result.end() - digits_after_point_result_4, result.end());
-    result_4.digits_after_point = std::vector<unsigned char>(result.begin(), result.end() - digits_after_point_result_4);
-
+    if (result.front() != 0x00) {
+        int digits_after_point_result_4 = a.digits_after_point.size() + b.digits_after_point.size();
+        int digits_to_add_at_front = digits_after_point_result_4 - result.size();
+        if (digits_to_add_at_front > 0) {
+            result.insert(result.begin(), digits_to_add_at_front, 0x00);
+        }
+        result_4.digits_after_point = result;
+    }
 
     BCD temp1 = add_bcd(result_1, result_2);
     BCD temp2 = add_bcd(result_3, result_4);
