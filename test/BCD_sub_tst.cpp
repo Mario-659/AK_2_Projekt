@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "BCD_sub.h"
+#include "BCD.h"
 
 TEST(BCDSubtractionTest, test_case_one) {
     BCD a, b, result;

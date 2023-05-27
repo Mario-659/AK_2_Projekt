@@ -1,4 +1,4 @@
-#include "BCD_mul.h"
+#include "BCD.h"
 
 std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b) {
     // return 0 if either of the numbers is 0

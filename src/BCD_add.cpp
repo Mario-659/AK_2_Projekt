@@ -1,4 +1,4 @@
-#include "BCD_add.h"
+#include "BCD.h"
 
 BCD add_bcd(const BCD& a, const BCD& b) {
     BCD result;

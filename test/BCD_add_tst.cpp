@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "BCD_add.h"
+#include "BCD.h"
 
 #include <vector>
 

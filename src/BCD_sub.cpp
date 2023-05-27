@@ -1,4 +1,4 @@
-#include "BCD_sub.h"
+#include "BCD.h"
 
 BCD sub_BCD(const BCD& a, const BCD& b) {
     BCD result;
