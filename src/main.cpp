@@ -1,51 +1,32 @@
 #include <iostream>
 
-using namespace std;
+#include "BCD.h"
 
-unsigned char bcd_add(unsigned char x, unsigned char y) {
-   asm(R"(
-            movb %0, %%al    # x -> AL
-            movb %1, %%bl    # y -> BL
-            add %%bl, %%al   # x + y -> AL
-            daa              # Decimal Adjust AL after Addition
-            movb %%al, %0    # al -> x
-      )" 
-      : "+r"(x)
-      : "r"(y)
-      : "%al", "%bl"
-   );
 
-   return x;
-}
+int main(int argc, char const *argv[])
+{
+    std::cout << "BCD (Binary Coded Decimal) Arithmetic Library Demonstration\n\n";
 
-unsigned char bcd_sub(unsigned char x, unsigned char y) {
-   asm(R"(
-            movb %0, %%al      # x -> AL
-            movb %1, %%bl      # y -> BL
-            sub %%bl, %%al     # x - y -> AL
-            das                # Decimal Adjust AL after Subtraction
-            movb %%al, %0      # al -> x
-      )" 
-      : "+r"(x)
-      : "r"(y)
-      : "%al", "%bl"
-   );
+    BCD a("43.426"), b("29.2");
 
-   return x;
-}
+    std::cout << "Given BCD numbers are:\n";
+    std::cout << "In a decimal representation:\n";
+    std::cout << "a: " << a.to_string_in_decimal() << "\n";
+    std::cout << "b: " << b.to_string_in_decimal() << "\n\n";
+    
+    std::cout << "In a hexadecimal representation:\n";
+    std::cout << "a: " << a.to_string_in_hexadecimal() << "\n";
+    std::cout << "b: " << b.to_string_in_hexadecimal() << "\n\n";
 
-int main() {
-   unsigned char x = 0x21;  // Liczba 54 zakodowana w BCD
-   unsigned char y = 0x23;  // Liczba 23 zakodowana w BCD
+    BCD sum = add_bcd(a, b);
+    std::cout << "The sum of 'a' and 'b' is: " << sum.to_string_in_decimal() << "\n\n";
 
-   unsigned char result = bcd_add(x, y); // Wynik dodawania
+    BCD difference = sub_BCD(a, b);
+    std::cout << "The difference of 'a' and 'b' is: " << difference.to_string_in_decimal() << "\n\n";
 
-   
-   //Wyswietlenie wyniku zakodowanego w BCD
-   cout << "Result of addition: " << hex << (int)result << endl;
-   
-   result = bcd_sub(x, y); // Wynik odejmowania
-   cout << "Result of substraction: " << hex << (int)result << endl;
+    BCD product = multiply_bcd(a, b);
+    std::cout << "The product of 'a' and 'b' is: " << product.to_string_in_decimal() << "\n";
 
-   return 0;
+
+    return 0;
 }
