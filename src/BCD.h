@@ -45,6 +45,11 @@ struct BCD {
      * @return std::string: String representation of the BCD number in hexadecimal format.
      */
     std::string to_string_in_hexadecimal() const;
+
+    BCD operator+(const BCD& other) const;
+    BCD operator-(const BCD& other) const;
+    BCD operator*(const BCD& other) const;
+    // TODO BCD operator/(const BCD& other) const;
 };
 
 /**

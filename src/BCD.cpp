@@ -52,3 +52,15 @@ BCD::BCD(const std::string& number_string) {
         }
     }
 }
+
+BCD BCD::operator+(const BCD& other) const {
+    return add(*this, other);
+}
+
+BCD BCD::operator-(const BCD& other) const {
+    return subtract(*this, other);
+}
+
+BCD BCD::operator*(const BCD& other) const {
+    return multiply(*this, other);
+}
