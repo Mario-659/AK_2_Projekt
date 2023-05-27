@@ -10,7 +10,7 @@ TEST(BCDSubtractionTest, test_case_one) {
     b.digits_before_point = {0x02, 0x03};
     b.digits_after_point = {};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05, 0x02}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01}));
@@ -25,7 +25,7 @@ TEST(BCDSubtractionTest, test_case_two) {
     b.digits_before_point = {0x09};
     b.digits_after_point = {};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x01}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x05}));
@@ -40,7 +40,7 @@ TEST(BCDSubtractionTest, test_case_three) {
     b.digits_before_point = {0x01, 0x02};
     b.digits_after_point = {0x01, 0x01};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x02, 0x03}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x03, 0x00}));
@@ -55,7 +55,7 @@ TEST(BCDSubtractionTest, test_case_four) {
     b.digits_before_point = {0x02, 0x00};
     b.digits_after_point = {0x00};
 
-    EXPECT_THROW(sub_BCD(a, b), std::underflow_error);
+    EXPECT_THROW(subtract(a, b), std::underflow_error);
 }
 
 TEST(BCDSubtractionTest, test_case_five) {
@@ -67,7 +67,7 @@ TEST(BCDSubtractionTest, test_case_five) {
     b.digits_before_point = {0x00, 0x01};
     b.digits_after_point = {0x00, 0x01};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x09, 0x08}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x09, 0x08}));
@@ -83,7 +83,7 @@ TEST(BCDSubtractionTest, should_subtract_two_numbers_with_same_length_no_borrow)
     b.digits_before_point = {0x02, 0x03};
     b.digits_after_point = {};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05, 0x02}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{}));
@@ -98,7 +98,7 @@ TEST(BCDSubtractionTest, should_subtract_two_numbers_with_borrow) {
     b.digits_before_point = {0x02, 0x05};
     b.digits_after_point = {};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x02, 0x08}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{}));
@@ -113,7 +113,7 @@ TEST(BCDSubtractionTest, should_subtract_two_numbers_with_decimal_points) {
     b.digits_before_point = {0x01, 0x05};
     b.digits_after_point = {0x02, 0x04};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x02, 0x02}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x02, 0x04}));
@@ -128,7 +128,7 @@ TEST(BCDSubtractionTest, should_handle_zero) {
     b.digits_before_point = {0x00};
     b.digits_after_point = {};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x00}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{}));
@@ -143,7 +143,7 @@ TEST(BCDSubtractionTest, should_handle_no_digits_before_point) {
     b.digits_before_point = {};
     b.digits_after_point = {0x02, 0x03};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x02, 0x04}));
@@ -158,7 +158,7 @@ TEST(BCDSubtractionTest, should_handle_different_lengths) {
     b.digits_before_point = {0x02, 0x03};
     b.digits_after_point = {0x00};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x07, 0x02, 0x09}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01}));
@@ -173,7 +173,7 @@ TEST(BCDSubtractionTest, should_subtract_numbers_with_same_digits_before_point) 
     b.digits_before_point = {0x05, 0x03};
     b.digits_after_point = {0x02, 0x03};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x00}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x02, 0x04}));
@@ -188,7 +188,7 @@ TEST(BCDSubtractionTest, should_subtract_numbers_with_same_digits_after_point) {
     b.digits_before_point = {0x02, 0x03};
     b.digits_after_point = {0x02, 0x04};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05, 0x02}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x00, 0x00}));
@@ -203,7 +203,7 @@ TEST(BCDSubtractionTest, should_handle_no_digits_after_point_in_one_number) {
     b.digits_before_point = {0x02, 0x03};
     b.digits_after_point = {};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05, 0x02}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x02, 0x04}));
@@ -218,7 +218,7 @@ TEST(BCDSubtractionTest, should_handle_trailing_zeros_in_result) {
     b.digits_before_point = {0x02, 0x03};
     b.digits_after_point = {0x01, 0x00};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x03, 0x00}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x00}));
@@ -233,7 +233,7 @@ TEST(BCDSubtractionTest, should_handle_leading_zeros_in_one_number) {
     b.digits_before_point = {0x00, 0x03};
     b.digits_after_point = {0x01, 0x02};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x07, 0x02}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x02}));
@@ -248,7 +248,7 @@ TEST(BCDSubtractionTest, should_handle_large_numbers) {
     b.digits_before_point = {0x08, 0x08, 0x08};
     b.digits_after_point = {0x08, 0x08};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x01, 0x01, 0x01}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x01}));
@@ -263,7 +263,7 @@ TEST(BCDSubtractionTest, should_subtract_small_from_large) {
     b.digits_before_point = {0x01, 0x01};
     b.digits_after_point = {0x01};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x08, 0x08}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x08}));
@@ -278,7 +278,7 @@ TEST(BCDSubtractionTest, should_handle_only_digits_after_point) {
     b.digits_before_point = {};
     b.digits_after_point = {0x08, 0x08};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x01}));
@@ -293,7 +293,7 @@ TEST(BCDSubtractionTest, should_handle_identical_numbers) {
     b.digits_before_point = {0x09, 0x09};
     b.digits_after_point = {0x08, 0x08};
 
-    result = sub_BCD(a, b);
+    result = subtract(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x00}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x00, 0x00}));

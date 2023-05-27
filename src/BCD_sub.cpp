@@ -1,6 +1,6 @@
 #include "BCD.h"
 
-BCD sub_BCD(const BCD& a, const BCD& b) {
+BCD subtract(const BCD& a, const BCD& b) {
     BCD result;
 
     int length_after_point = std::max(a.digits_after_point.size(), b.digits_after_point.size());

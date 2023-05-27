@@ -53,13 +53,13 @@ struct BCD {
  * @param a: First BCD number.
  * @param b: Second BCD number.
  *
- * The function add_bcd aligns the two BCD numbers by their decimal points,
+ * The function aligns the two BCD numbers by their decimal points,
  * and then adds them digit by digit from right to left using assembly instructions to handle BCD addition.
  * If the sum of two digits is more than 9, a carry is generated and added to the next higher digit.
  *
  * @return BCD: Result of the addition operation.
  */
-BCD add_bcd(const BCD& a, const BCD& b);
+BCD add(const BCD& a, const BCD& b);
 
 /**
  * Performs addition operation on two unpacked BCD numbers represented as vectors of unsigned chars.
@@ -72,7 +72,7 @@ BCD add_bcd(const BCD& a, const BCD& b);
  *
  * @return std::vector<unsigned char>: Result of the addition operation represented as a vector of unsigned chars.
  */
-std::vector<unsigned char> bcd_add(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b);
+std::vector<unsigned char> add(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b);
 
 /**
  * Performs subtraction operation on two unpacked BCD (Binary Coded Decimal) numbers.
@@ -87,7 +87,7 @@ std::vector<unsigned char> bcd_add(const std::vector<unsigned char>& a, const st
  * @return BCD: Result of the subtraction operation. 
  *              Throws an underflow_error if the minuend is smaller than the subtrahend.
  */
-BCD sub_BCD(const BCD& a, const BCD& b);
+BCD subtract(const BCD& a, const BCD& b);
 
 /**
  * Perform multiplication operation on two unpacked BCD numbers represented as vectors of unsigned chars.
@@ -99,7 +99,7 @@ BCD sub_BCD(const BCD& a, const BCD& b);
  *
  * @return std::vector<unsigned char>: Expected to return result of the multiplication operation represented as a vector of unsigned chars.
  */
-std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b);
+std::vector<unsigned char> multiply(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b);
 
 /**
  * Performs multiplication operation on two unpacked BCD (Binary Coded Decimal) numbers.
@@ -107,11 +107,11 @@ std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, const st
  * @param a: First BCD number.
  * @param b: Second BCD number.
  *
- * The function multiply_bcd takes two BCD numbers as input and returns their product.
+ * The function multiply takes two BCD numbers as input and returns their product.
  * The exact behavior of the function depends on its implementation.
  *
  * @return BCD: Result of the multiplication operation. 
  */
-BCD multiply_bcd(const BCD& a, const BCD& b);
+BCD multiply(const BCD& a, const BCD& b);
 
 #endif

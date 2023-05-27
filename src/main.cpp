@@ -18,13 +18,13 @@ int main(int argc, char const *argv[])
     std::cout << "a: " << a.to_string_in_hexadecimal() << "\n";
     std::cout << "b: " << b.to_string_in_hexadecimal() << "\n\n";
 
-    BCD sum = add_bcd(a, b);
+    BCD sum = add(a, b);
     std::cout << "The sum of 'a' and 'b' is: " << sum.to_string_in_decimal() << "\n\n";
 
-    BCD difference = sub_BCD(a, b);
+    BCD difference = subtract(a, b);
     std::cout << "The difference of 'a' and 'b' is: " << difference.to_string_in_decimal() << "\n\n";
 
-    BCD product = multiply_bcd(a, b);
+    BCD product = multiply(a, b);
     std::cout << "The product of 'a' and 'b' is: " << product.to_string_in_decimal() << "\n";
 
 

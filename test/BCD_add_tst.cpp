@@ -12,7 +12,7 @@
 //     b.digits_before_point = {0x02};
 //     b.digits_after_point = {0x04};
 
-//     result = add_bcd(a, b);
+//     result = add(a, b);
 
 //     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05}));
 //     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x09}));
@@ -28,7 +28,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_carry_1) {
     b.digits_before_point = {0x02};
     b.digits_after_point = {0x06};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x06}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01}));
@@ -44,7 +44,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_carry_2) {
     b.digits_before_point = {0x05};
     b.digits_after_point = {0x04};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x01, 0x04}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01}));
@@ -60,7 +60,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_carry_and_floating_point) {
     b.digits_before_point = {0x03};
     b.digits_after_point = {0x04, 0x05};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x08}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x07, 0x07, 0x01}));
@@ -76,7 +76,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_carry_and_floating_point_2) {
     b.digits_before_point = {0x05};
     b.digits_after_point = {0x03, 0x02, 0x01};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x08}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x07, 0x07, 0x01}));
@@ -92,7 +92,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_same_length_and_no_carry) {
     b.digits_before_point = {0x05};
     b.digits_after_point = {0x06, 0x06};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x06}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x08, 0x09}));
@@ -107,7 +107,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_different_length_and_no_carry)
 
     b.digits_before_point = {0x05, 0x06};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05, 0x07}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x02, 0x03}));
@@ -121,7 +121,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_different_length_and_no_carry_
 
     b.digits_before_point = {0x05, 0x06};
 
-    result = add_bcd(b, a);
+    result = add(b, a);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05, 0x07}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x02, 0x03}));
@@ -137,7 +137,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_same_digits_and_same_floating_
     b.digits_before_point = {0x01};
     b.digits_after_point = {0x02, 0x03};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x02}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x04, 0x06}));
@@ -152,7 +152,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_different_length_and_carry_2) 
 
     b.digits_before_point = {0x01, 0x07};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x02, 0x00}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x01, 0x05, 0x01}));
@@ -166,7 +166,7 @@ TEST(BCDAdditionTest, should_add_two_numbers_with_no_digits_before_point_1) {
 
     b.digits_after_point = {0x01, 0x07};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x02, 0x07}));
@@ -180,7 +180,7 @@ TEST(BCDAdditionTest, another_test_case) {
     b.digits_before_point = {0x09, 0x06};
     b.digits_after_point = {0x03};
 
-    result = add_bcd(a, b);
+    result = add(a, b);
 
     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x01, 0x04, 0x05, 0x04, 0x01}));
     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x03}));
