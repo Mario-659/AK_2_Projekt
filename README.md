@@ -4,23 +4,44 @@ This project provides a C++ library for Binary Coded Decimal (BCD) arithmetic op
 
 ## Table of Contents
 
+- [BCD Representation](#bcd-representation)
 - [Features](#features)
+- [Implementation](#implementation)
 - [Prerequisites](#prerequisites)
 - [Getting Started](#getting-started)
   - [Building the Library](#building-the-library)
   - [Running Unit Tests](#running-unit-tests)
   <!-- - [Using the Library](#using-the-library) -->
 
+## BCD Representation
+
+```cpp
+struct BCD {
+    std::vector<unsigned char> digits_before_point;
+    std::vector<unsigned char> digits_after_point;
+};
+```
+
+Each decimal digit is represented by a single byte (`unsigned char`). The most significant digit is stored in the first element of the vector. The digits are stored in the vector in the same order as they are in the BCD number. The digits before the point are stored in the `digits_before_point` vector, and the digits after the point are stored in the `digits_after_point` vector.
+
 ## Features
 
-This BCD Arithmetic Library supports the following operations:
+Supported operations:
 
 - Addition
 - Subtraction
 - Multiplication
-- Division
-- BCD-to-Decimal conversion
-- Decimal-to-BCD conversion
+- ~~Division~~
+
+## Implementation
+
+Assembly instructions used to adjust the result of operations can be found [here](https://www.felixcloutier.com/x86/). The following instructions are used:
+- [AAA](https://www.felixcloutier.com/x86/aaa): ASCII Adjust After Addition
+- [AAS](https://www.felixcloutier.com/x86/aas): ASCII Adjust AL After Subtraction
+- [AAM](https://www.felixcloutier.com/x86/aam): ASCII Adjust AX After Multiply
+<!-- - [AAD](https://www.felixcloutier.com/x86/aad): ASCII Adjust AX Before Division -->
+
+The assembly code is written for x86-64 architecture, and compiled using the GNU assembler (GAS).
 
 ## Prerequisites
 
@@ -59,8 +80,22 @@ To build the library on linux, follow these steps:
    make
    ```
 
+If you are getting error below:
+   
+   ```sh
+   fatal error: bits/c++config.h: No such file or directory
+   #include <bits/c++config.h>
+   ```
+then make sure to install dependencies needed for 64-bit architecture:
+      
+   ```sh
+   sudo apt-get update && sudo apt-get install -y g++-multilib libc6-dev-i386
+   ```
+
 ### Running Unit Tests
-To run the unit tests, follow these steps:
+
+The unit tests are implemented using [Google Test](https://github.com/google/googletest).
+To run the tests, follow these steps:
 
 1. Build the library as described in the previous section.
 2. Run the unit tests:
