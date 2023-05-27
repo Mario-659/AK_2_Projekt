@@ -12,6 +12,7 @@ add_compile_options(-Wall -g -m32 -O3)
 
 set(SOURCES src/main.cpp
             src/BCD.h
+            src/BCD.cpp
             src/BCD_add.cpp
             src/BCD_sub.cpp
             src/BCD_mul.cpp
