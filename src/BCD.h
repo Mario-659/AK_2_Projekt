@@ -16,6 +16,22 @@ struct BCD {
     std::vector<unsigned char> digits_after_point;
 
     /**
+     * Constructs a new unpacked BCD (Binary Coded Decimal) number from a string representation of a decimal number.
+     *
+     * @param decimal_representation: A string representing a decimal number. Example: "123.456"
+     * 
+     * @return BCD: A new BCD object representing the decimal number given in the input string.
+     */
+    BCD(const std::string& decimal_representation);
+
+    /**
+     * Initializes a new empty BCD number.
+     *
+     * @return BCD: A new, empty BCD number.
+     */
+    BCD() = default;
+
+    /**
      * Converts an unpacked BCD number to a string in decimal format.
      *
      * @return std::string: String representation of the BCD number in decimal format.
