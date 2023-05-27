@@ -55,7 +55,7 @@ inline std::vector<unsigned char> bcd_mul(const std::vector<unsigned char>& a, c
 
 
     result = partial_products[0];
-    for (int i = 1; i < partial_products.size(); ++i) {
+    for (size_t i = 1; i < partial_products.size(); ++i) {
         result = bcd_add(partial_products[i], result);
     }
 
