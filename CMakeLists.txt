@@ -15,6 +15,9 @@ set(SOURCES src/main.cpp
             src/BCD.h
             src/BCD_mul.h
             src/BCD_sub.h
+            src/BCD_add.cpp
+            src/BCD_sub.cpp
+            src/BCD_mul.cpp
             )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
