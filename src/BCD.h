@@ -61,6 +61,8 @@ struct BCD {
  * The function aligns the two BCD numbers by their decimal points,
  * and then adds them digit by digit from right to left using assembly instructions to handle BCD addition.
  * If the sum of two digits is more than 9, a carry is generated and added to the next higher digit.
+ * 
+ * The function adds two unpacked BCD numbers digit by digit from right to left using assembly instruction AAA adjust the sum.
  *
  * @return BCD: Result of the addition operation.
  */
@@ -72,8 +74,7 @@ BCD add(const BCD& a, const BCD& b);
  * @param a: First unpacked BCD number represented as a vector of unsigned chars.
  * @param b: Second unpacked BCD number represented as a vector of unsigned chars.
  *
- * The function bcd_add adds two vectors digit by digit from right to left using assembly instructions to handle BCD addition.
- * If the sum of two digits is more than 9, a carry is generated and added to the next higher digit.
+ * The function adds two vectors digit by digit from right to left using assembly instruction AAA to adjust the sum.
  *
  * @return std::vector<unsigned char>: Result of the addition operation represented as a vector of unsigned chars.
  */
@@ -85,9 +86,7 @@ std::vector<unsigned char> add(const std::vector<unsigned char>& a, const std::v
  * @param a: First BCD number (minuend).
  * @param b: Second BCD number (subtrahend).
  *
- * The function sub_BCD aligns the two BCD numbers by their decimal points,
- * and then subtracts them digit by digit from right to left using assembly instructions to handle BCD subtraction.
- * If the subtrahend digit is more than the minuend digit, a borrow is generated from the next higher digit.
+ * The function subtracts two unpacked BCD numbers digit by digit from right to left using assembly instruction AAS to adjust the difference.
  *
  * @return BCD: Result of the subtraction operation. 
  *              Throws an underflow_error if the minuend is smaller than the subtrahend.
@@ -100,7 +99,7 @@ BCD subtract(const BCD& a, const BCD& b);
  * @param a: First BCD number represented as a vector of unsigned chars.
  * @param b: Second BCD number represented as a vector of unsigned chars.
  *
- * The implementation of this function is not provided here, and the function's exact behavior depends on its implementation.
+ * The function multiplies two vectors using assembly instruction AAM to adjust the product.
  *
  * @return std::vector<unsigned char>: Expected to return result of the multiplication operation represented as a vector of unsigned chars.
  */
@@ -112,10 +111,10 @@ std::vector<unsigned char> multiply(const std::vector<unsigned char>& a, const s
  * @param a: First BCD number.
  * @param b: Second BCD number.
  *
- * The function multiply takes two BCD numbers as input and returns their product.
- * The exact behavior of the function depends on its implementation.
+ * The function multiplies two unpacked BCD numbers using function multiply(const std::vector<unsigned char>& a, const std::vector<unsigned char>& b)
+ * to calculate the partial products and function add(const BCD& a, const BCD& b) to return the sum of partial products.
  *
- * @return BCD: Result of the multiplication operation. 
+ * @return BCD: Result of the multiplication operation.
  */
 BCD multiply(const BCD& a, const BCD& b);
 
