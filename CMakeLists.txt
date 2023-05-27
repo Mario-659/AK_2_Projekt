@@ -65,3 +65,11 @@ target_link_libraries(${PROJECT_NAME}_tst gtest_main)
 target_link_libraries(${PROJECT_NAME}_tst ${PROJECT_NAME}_lib)
 
 add_test(NAME ${PROJECT_NAME}_tst COMMAND ${PROJECT_NAME}_tst)
+
+##Performance testing
+set(SOURCES_PERF perf_test/main.cpp
+                 )
+add_executable(${PROJECT_NAME}_perf ${SOURCES_PERF})
+target_include_directories(${PROJECT_NAME}_perf PRIVATE include ${PROJECT_NAME})
+target_include_directories(${PROJECT_NAME}_perf PRIVATE include lib)
+target_link_libraries(${PROJECT_NAME}_perf ${PROJECT_NAME}_lib)
