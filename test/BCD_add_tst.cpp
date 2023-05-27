@@ -3,20 +3,20 @@
 
 #include <vector>
 
-// TEST(BCDAdditionTest, should_add_two_numbers_without_carry) {
-//     BCD a, b, result;
+TEST(BCDAdditionTest, should_add_two_numbers_without_carry) {
+    BCD a, b, result;
 
-//     a.digits_before_point = {0x03};
-//     a.digits_after_point = {0x05};
+    a.digits_before_point = {0x03};
+    a.digits_after_point = {0x05};
 
-//     b.digits_before_point = {0x02};
-//     b.digits_after_point = {0x04};
+    b.digits_before_point = {0x02};
+    b.digits_after_point = {0x04};
 
-//     result = add(a, b);
+    result = add(a, b);
 
-//     EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05}));
-//     EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x09}));
-// }
+    EXPECT_EQ(result.digits_before_point, (std::vector<unsigned char>{0x05}));
+    EXPECT_EQ(result.digits_after_point, (std::vector<unsigned char>{0x09}));
+}
 
 
 TEST(BCDAdditionTest, should_add_two_numbers_with_carry_1) {
