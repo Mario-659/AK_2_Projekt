@@ -5,6 +5,7 @@
 #include <cstdio>
 #include <stdexcept>
 #include <sstream>
+#include <iomanip>
 
 /**
  * The BCD struct represents a Binary Coded Decimal number. It has two fields:
@@ -37,6 +38,13 @@ struct BCD {
      * @return std::string: String representation of the BCD number in decimal format.
      */
     std::string to_string_in_decimal() const;
+
+    /**
+     * Converts an unpacked BCD number to a string in hexadecimal format.
+     *
+     * @return std::string: String representation of the BCD number in hexadecimal format.
+     */
+    std::string to_string_in_hexadecimal() const;
 };
 
 /**
