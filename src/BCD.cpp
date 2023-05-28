@@ -66,14 +66,18 @@ BCD BCD::operator*(const BCD& other) const {
 }
 
 bool BCD::operator>(const BCD& other) const {
-    if (this->digits_before_point > other.digits_before_point)
-        return true;
-    else if (this->digits_before_point < other.digits_before_point)
-        return false;
-    else {
-        if (this->digits_after_point > other.digits_after_point)
-            return true;
-        else
-            return false;
+    if (this->digits_before_point.size() != other.digits_before_point.size())
+        return this->digits_before_point.size() > other.digits_before_point.size();
+
+    for (size_t i = 0; i < this->digits_before_point.size(); ++i) {
+        if (this->digits_before_point[i] != other.digits_before_point[i])
+            return this->digits_before_point[i] > other.digits_before_point[i];
     }
+
+    for (size_t i = 0; i < this->digits_after_point.size(); ++i) {
+        if (this->digits_after_point[i] != other.digits_after_point[i])
+            return this->digits_after_point[i] > other.digits_after_point[i];
+    }
+
+    return false;
 }
