@@ -64,3 +64,16 @@ BCD BCD::operator-(const BCD& other) const {
 BCD BCD::operator*(const BCD& other) const {
     return multiply(*this, other);
 }
+
+bool BCD::operator>(const BCD& other) const {
+    if (this->digits_before_point > other.digits_before_point)
+        return true;
+    else if (this->digits_before_point < other.digits_before_point)
+        return false;
+    else {
+        if (this->digits_after_point > other.digits_after_point)
+            return true;
+        else
+            return false;
+    }
+}

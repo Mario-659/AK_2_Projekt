@@ -50,6 +50,8 @@ struct BCD {
     BCD operator-(const BCD& other) const;
     BCD operator*(const BCD& other) const;
     // TODO BCD operator/(const BCD& other) const;
+
+    bool operator>(const BCD& other) const;
 };
 
 /**
