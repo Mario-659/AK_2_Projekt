@@ -68,6 +68,7 @@ add_test(NAME ${PROJECT_NAME}_tst COMMAND ${PROJECT_NAME}_tst)
 
 ##Performance testing
 set(SOURCES_PERF perf_test/main.cpp
+                 perf_test/BCDPerformanceTester.h
                  )
 add_executable(${PROJECT_NAME}_perf ${SOURCES_PERF})
 target_include_directories(${PROJECT_NAME}_perf PRIVATE include ${PROJECT_NAME})
